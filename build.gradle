@@ -1,0 +1,27 @@
+plugins {
+    id 'application'
+}
+
+group 'io.earlisreal'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jsoup:jsoup:1.13.1'
+}
+
+mainClassName = 'io.earlisreal.etorist.ETorist'
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
